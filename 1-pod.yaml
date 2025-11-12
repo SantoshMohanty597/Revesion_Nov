@@ -1,0 +1,100 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: 11-pod                        # Pod name
+  namespace: 11-ns                    # Namespace where Pod will be created
+  labels:                             # Key-value pairs used for selection
+    app: 11-nginx
+    env: 11-test
+    tier: 11-frontend
+  annotations:                        # Non-identifying metadata
+    created: "Santosh-Mohanty"
+    purpose: "Pod.yaml_Creation"
+
+spec:
+  nodeSelector:                       # Schedule pod only on nodes with this label
+    node3: test
+
+  serviceAccountName: default         # Service account assigned to Pod
+  restartPolicy: Always               # Restart containers automatically if they fail
+
+  containers:
+    - name: 11-nginx-container
+      image: nginx:latest
+      imagePullPolicy: IfNotPresent   # Pull image only if not already present
+
+      ports:
+        - containerPort: 80           # Expose port 80 inside container
+          name: http                  # pod port label for service if dont want to mentione targetport as 80
+          protocol: TCP
+
+      env:                            # Environment variables
+        - name: env-ref
+          valueFrom:
+            configMapKeyRef:          # Get value from ConfigMap key
+              name: 11-configmap
+              key: backend_url
+
+      resources:                      # Resource requests and limits
+        requests:
+          cpu: "100m"
+          memory: "128Mi"
+        limits:
+          cpu: "250m"
+          memory: "256Mi"
+
+      livenessProbe:                  # Check if container is alive
+        httpGet:
+          path: /
+          port: 80
+        initialDelaySeconds: 10       # Wait before first probe
+        periodSeconds: 10             # Run every 10s
+        failureThreshold: 3           # Restart after 3 failed attempts
+
+      readinessProbe:                 # Check if container is ready to serve traffic
+        httpGet:
+          path: /
+          port: 80
+        initialDelaySeconds: 5
+        periodSeconds: 5
+
+      volumeMounts:
+        - name: html-volume           # Shared EmptyDir volume
+          mountPath: /usr/share/nginx/html
+
+        - name: secret-volume         # Secret or ConfigMap mounted as file
+          mountPath: /etc/secret
+
+    - name: sidecar-logger            # Sidecar container for log reading
+      image: busybox
+      command: ["sh", "-c", "tail -f /var/log/nginx/access.log"]
+      ports:
+      - containerPort: 8080   ###Use a tool like nc or a lightweight web server and expose a port
+      ### nc -lk -p 8080    ---- nc(netcat)
+      volumeMounts:
+        - name: html-volume
+          mountPath: /var/log/nginx   # Same shared volume as main container
+
+  volumes:                            # Define Pod-level shared volumes
+    - name: html-volume
+      emptyDir: {}                    # Temporary shared storage (deleted when Pod dies)
+
+    - name: xyz
+      persistentVolumeClaim:          # Attach existing PVC to Pod
+        claimName: my-pvc             # Must be an existing PVC name
+
+  tolerations:                        # Allow Pod to run on tainted nodes
+    - key: "env"
+      operator: "Equal"
+      value: "dev"
+      effect: "NoSchedule"
+
+  affinity:                           # Control advanced node scheduling
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                  - mycluster-worker2 # Only schedule Pod on worker2 node

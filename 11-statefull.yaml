@@ -1,0 +1,50 @@
+apiVersion: v1 
+kind: StatefulSet
+metadata:
+    name: svc-statefull
+    namespace: 
+    labels:
+    annotations:
+spec:
+  serviceName: 
+  replicas: 3
+  template:
+    metadata:
+         name:
+         namespace:
+         labels:
+         annotations:
+    spec:
+      name:
+      image:
+      imagePullPolicy:
+
+      ports:
+        name:
+        containerPort:
+        protocol:
+      env:
+      resources:
+          requests:
+          limits:
+      volumeMounts:
+         name:
+         mountPath:
+      livenessProbe:
+           httpGet:
+           ports:
+           path:
+           initialDelaySeconds:
+           periodSeconds:
+           failureThreshold:
+      readinessProbe:
+          httpGet:
+          ports:
+          path:
+          initialDelaySeconds:
+          periodSeconds:
+  volume:
+  affinity:
+  tolerations:
+        
+  

@@ -1,0 +1,57 @@
+apiVersion: app/v1
+kind: ReplicaSet
+metadata:
+    name:
+    labels:
+    annotations:
+
+spec:
+  replicas:
+  serviceAccountName:
+  selector:
+     matchLables:
+  containers:
+        - name:
+          image:
+          imagePullPolicy:
+
+          ports:
+          - name:   
+            containerPort:
+            protocol:
+          
+          env:
+          resources:
+             requests:
+                 cpu:
+                 memory:
+             limits:
+                 cpu:
+                 memory:
+          volumeMounts:
+            - name:
+              mountPath:
+          livenessProbe:
+               httpGet:
+               port:
+               path:
+               initialDelaySeconds:
+               periodSeconds:
+               failureThreshold:
+          
+          readinessProbe:
+              httpGet:
+                 port:
+                 path:
+                 initialDelaySeconds:
+                 periodSeconds:
+  volume:
+  tolerations:
+  affinity:
+     nodeAffinity:
+     requiredDuringSchedulingIgnoredDuringExecution:
+
+             
+               
+
+         

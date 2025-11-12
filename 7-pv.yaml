@@ -1,0 +1,14 @@
+apiVersion: v1 
+kind: persistentVolume
+metadata:
+    name:
+    namespace:
+spec:
+  capacity:
+      storage:
+  accesmode: 
+     - ReadWriteOnce
+  persistentVolumeReClaimPolicy: delete/retain
+  storageClassName:
+  hostPath:
+      path: /mnt/data

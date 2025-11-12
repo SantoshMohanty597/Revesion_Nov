@@ -1,0 +1,24 @@
+apiVersion: autoscaling/v2
+kind: VerticalPodAutoscaler
+metadata:
+    name:
+    namespace:
+spec:
+  targetRef: 
+      apiVersion:
+      kind:
+      name: 
+  updatepolicy:
+      updatemode: "Auto"
+  resourcePolicy:
+    containerPolicies:
+      - containerName:
+           minAllowed:
+               cpu:
+               memory:
+           maxAllowed:
+               cpu: 
+              memory:
+           controlledResources: [ "cpu" , "memory"]  
+     
+      

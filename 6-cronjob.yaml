@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+    name:
+    namespace:
+    labels:
+      app:
+      tier:
+    annotations:
+spec:
+  schedule: 
+  concurrencyPolicy:
+  
+  jobTemplates:
+    spec:
+      completions:
+      parallelism:
+      backofflLimts:
+      ttlSecondAfterFinshed:
+
+      template:
+        metadata:
+        

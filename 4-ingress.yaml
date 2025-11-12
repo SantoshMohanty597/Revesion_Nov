@@ -1,0 +1,24 @@
+apiVersion:
+kind:
+metadata:
+    name:
+    namespace:
+    labels:
+       app:
+       tier:
+    annotations:
+       description:
+spec:
+  ingresClassName: nginx
+  rules:
+  - host: #### DNS NAME
+    http: 
+      paths:
+      - path: /
+        pathType: Prefix / excat
+        backend:
+          service: 
+              name: 
+              port:
+              - number: 80
+  

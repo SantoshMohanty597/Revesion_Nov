@@ -1,0 +1,59 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+    name:
+    namespace:
+    labels:
+    annotations:
+spec:
+ completions:
+ parallelism:
+ backofflLimts:
+ ttlSecondAfterFinshed:
+
+template:
+  metadata:
+      name:
+      labels:
+      annotations:
+  spec:
+    restartPolicy:
+    serviceAccountName:
+    nodeSelector:
+    containers:
+        - name:
+          image:
+          imagePullPolicy:
+          
+          ports:
+            name:
+            containerPort:
+            protocol:
+          
+          env:
+          volumeMounts:
+            - name:
+              mountPath:
+
+          livenessProbe:
+              httpGet:
+                path:
+                port:
+          initialDelaySeconds:
+          periodSeconds:
+          failureThreshold:
+
+          readinessProbe:
+          resources:
+             requests:
+                  cpu:
+                  memory:
+             limits:
+                 cpu:
+                 memory:
+
+    volumes:
+        - name:
+          persistentVolumeClaim:
+          claimName:
+          

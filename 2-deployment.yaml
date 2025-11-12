@@ -1,0 +1,71 @@
+apiVersion: app/v1
+kind: Deployment
+metadata:
+    name: 11-dev
+    namespace: 11-ns
+    
+    labels:                             # Key-value pairs used for selection
+      app: 11-nginx
+      env: 11-test
+      tier: 11-frontend
+    annotations:                        # Non-identifying metadata
+      created: "Santosh-Mohanty"
+      purpose: "Pod.yaml_Creation"
+spec:
+  replicas: 2
+  strategy:
+     type : RollingUpdate / Recreate
+     RollingUpdate:
+           maxSurge:
+           MaxUnavailable:
+  selector:
+    matchLables:
+          app: 11-nginx
+          env: 11-test
+  template:
+    metadata: 
+        name:
+        namespace:
+    
+    spec:
+      nodeSelector:
+      serviceAccountName:
+      restartPolicy:
+      containers:
+          - name:
+            image:
+            imagePullPolicy:
+
+            ports:
+              containerPort:
+              name:
+              protocol:
+
+            resources:
+               requests:
+                  cpu:
+                  memory:
+               limits:
+                  cpu:
+                  memory:
+            env:
+            volumeMounts:
+                 - name:
+                   mountPath:
+            livenessProbe:
+                  httpGet:
+                    path: /
+                    port: 80
+            initialDelaySeconds:
+            periodSeconds:
+            failureThreshold:
+
+            readinessProbe:
+                  httpGet:
+                    path:
+                    port:
+                  initialDelaySeconds:
+                  periodSeconds:
+      volumes:
+      tolerations:
+      affinity:  
