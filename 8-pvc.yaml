@@ -1,13 +1,11 @@
-apiVersion: v1 
-kind: persistentVolumeClaim
+apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
-   name:
-   namespace:
+  name: ebs-pvc
 spec:
-  storageClassName: Manual 
-  accesmode:
+  accessModes:
+    - ReadWriteOnce                       # Must match PV
+  storageClassName: ebs-sc                # Must match PV
   resources:
-     requests:
-        storage:
-
-  
+    requests:
+      storage: 10Gi                        # Claiming 10 GB

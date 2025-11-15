@@ -18,7 +18,5 @@ spec:
                memory:
            maxAllowed:
                cpu: 
-              memory:
-           controlledResources: [ "cpu" , "memory"]  
-     
-      
+               memory:
+           controlledResources: [ "cpu" , "memory"]
