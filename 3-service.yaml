@@ -13,9 +13,14 @@ spec:
       app: 11-nginx
   type : ClusterIP
   ports:
-    name: pod-service-port
+    name: app2           # optional but recommended
+    port: 80             # Service port (client-facing)
+    targetPort: app2     # 👈 must match Deployment port name
     protocol: TCP
-    port: 80
-    targetPort: 80 #### here you can use the pod-port label
-    
+
+  #### Both are Valid
+
+  ports: 
+    port:80
+    targetPort: 8080
     
